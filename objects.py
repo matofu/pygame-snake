@@ -39,8 +39,8 @@ class Player:
         if self.dead:
             self.movement = [0, 0]
     def render(self, surf):
-        for rect in self.get_rects():
-            pg.draw.rect(surf, self.color, rect, self.rect_size // 4)
+        for square in self.positions:
+            pg.draw.rect(surf, self.color, pg.Rect(square[0] * self.rect_size, square[1] * self.rect_size, self.rect_size, self.rect_size), self.rect_size // 4)
     def handle_events(self, event, apple):
         if event.type == pg.KEYDOWN and not self.buffer:
             if (event.key == pg.K_UP or event.key == pg.K_w) and self.movement[1] != 1:
@@ -49,7 +49,7 @@ class Player:
             if (event.key == pg.K_DOWN or event.key == pg.K_s) and self.movement[1] != -1:
                 self.buffer = 1
                 self.movement = [0, 1]
-            if (event.key == pg.K_LEFT or event.key == pg.K_a) and self.movement[0] != 1:
+            if (event.key == pg.K_LEFT or event.key == pg.K_a) and self.movement[0] != 1 and self.movement != [0, 0]:
                 self.buffer = 1
                 self.movement = [-1, 0]
             if (event.key == pg.K_RIGHT or event.key == pg.K_d) and self.movement[0] != -1:
@@ -58,11 +58,6 @@ class Player:
             if self.dead:
                 apple.reset()
                 self.reset()
-    def get_rects(self):
-        rects = []
-        for square in self.positions:
-            rects.append(pg.Rect(square[0] * self.rect_size, square[1] * self.rect_size, self.rect_size, self.rect_size))
-        return rects
     def reset(self):
         self.movement = [1, 0]
         self.length = 4
@@ -86,8 +81,10 @@ class Apple:
         self.rect = pg.Rect(self.position[0] * self.rect_size, self.position[1] * self.rect_size, self.rect_size, self.rect_size)
     def collisions(self, player, score_words):
         self.rect = pg.Rect(self.position[0] * self.rect_size, self.position[1] * self.rect_size, self.rect_size, self.rect_size)
-        if self.rect.colliderect(player.get_rects()[0]):
+        if self.rect.colliderect(pg.Rect(player.positions[0][0] * self.rect_size, player.positions[0][1] * self.rect_size, self.rect_size, self.rect_size)):
             self.position = [random.randint(0, self.screen_size - 1), random.randint(0, self.screen_size - 1)]
+            while self.position in player.positions:
+                self.position = [random.randint(0, self.screen_size - 1), random.randint(0, self.screen_size - 1)]
             player.apples_eaten += 1
             score_words.font_render = score_words.font.render(f'Score: {player.apples_eaten * 100}', 1, WHITE)
             player.grow_longer()
