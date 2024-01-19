@@ -4,7 +4,7 @@ from objects import Player
 from objects import Apple
 from objects import WordScreen
 from objects import Words
-# testing commit from terminal
+
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
