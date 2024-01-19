@@ -46,13 +46,13 @@ class Player:
             if (event.key == pg.K_UP or event.key == pg.K_w) and self.movement[1] != 1:
                 self.buffer = 1 # inside this if statement and not the broader one because it prevents the player from not being able to move after pressing any key except arrow keys at the start of the game
                 self.movement = [0, -1]
-            if (event.key == pg.K_DOWN or event.key == pg.K_s) and self.movement[1] != -1:
+            elif (event.key == pg.K_DOWN or event.key == pg.K_s) and self.movement[1] != -1:
                 self.buffer = 1
                 self.movement = [0, 1]
-            if (event.key == pg.K_LEFT or event.key == pg.K_a) and self.movement[0] != 1 and self.movement != [0, 0]:
+            elif (event.key == pg.K_LEFT or event.key == pg.K_a) and self.movement[0] != 1 and self.movement != [0, 0]:
                 self.buffer = 1
                 self.movement = [-1, 0]
-            if (event.key == pg.K_RIGHT or event.key == pg.K_d) and self.movement[0] != -1:
+            elif (event.key == pg.K_RIGHT or event.key == pg.K_d) and self.movement[0] != -1:
                 self.buffer = 1
                 self.movement = [1, 0]
             if self.dead:

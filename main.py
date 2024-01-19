@@ -42,7 +42,7 @@ class Game:
     def basic_event_handling(self, event):
         if event.type == pg.QUIT:
             self.running = 0
-        if event.type == pg.VIDEORESIZE:
+        elif event.type == pg.VIDEORESIZE:
             self.current_screen_size = event.size
     def screen_resize(self):
         if self.current_screen_size[0] // self.current_screen_size[1]:
