@@ -5,7 +5,7 @@ A snake game written in python using the 'pygame' module
 - You can pause the game by pressing the ESCAPE key
 - The highscore saves
 ## Installation
-First, remember to have python installed. Then, enter your favorite terminal emulator and navigate to the folder that you want to install the game in. After that, clone the repository with git:
+First, have python and pygame installed. Then, enter your favorite terminal emulator and navigate to the folder that you want to install the game in. After that, clone the repository with git:
    ```
    git clone https://github.com/matofu/pygame-snake
    ```
